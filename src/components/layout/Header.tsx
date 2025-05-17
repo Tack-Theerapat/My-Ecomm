@@ -5,7 +5,7 @@ const AnnouncementBar = () => {
     return (
         <div className='w-full bg-black py-2'>
             <div className='container mx-auto flex items-center justify-center px-8'>
-                <span className='text-center text-sm font-medium tarcking-wide text-white'>
+                <span className='text-center text-sm font-medium tracking-wide text-white'>
                     FREE SHIPPING ON ORDERS OVER $15.00 X FREE RETURN
                 </span>            
             </div>
@@ -16,7 +16,7 @@ const AnnouncementBar = () => {
 
 const Header = () => {
 
-        const [isOpen, setIsOpen] = useState<boolean>(false);
+        const [isOpen, setIsOpen] = useState<boolean>(true);
         const [prevScrollY, setPrevScrollY] = useState<number>(0);
 
         useEffect(() => {
@@ -39,11 +39,13 @@ const Header = () => {
             return () => {
                 window.removeEventListener('scroll', handleScroll)
             }
-        }, [])
+        }, [prevScrollY])
 
     return (
     <header className='w-full sticky top-0 z-50'>
-        <div className='w-full transform transition-transform duration-300 ease-in-out'>
+        <div 
+        className={`w-full bg-white shadow-md transition-transform duration-300 ease-in-out transform ${isOpen ? 'translate-y-0' : '-translate-y-full'}`}
+        >
             <AnnouncementBar />
         </div>
     </header>
